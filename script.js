@@ -62,6 +62,18 @@ function showInfo(message) {
     successMessage.style.display = 'none';
 }
 
+// ==================== ПРОВЕРКА ЗА АДМИНИСТРАТОР ====================
+async function isUserAdmin(userId) {
+    try {
+        const userDoc = await db.collection('users').doc(userId).get();
+        const userData = userDoc.data();
+        return userData?.isAdmin === true || userData?.role === 'admin';
+    } catch (error) {
+        console.error('Грешка при проверка за администратор:', error);
+        return false;
+    }
+}
+
 // ==================== ПРЕВКЛЮЧВАНЕ МЕЖДУ ВХОД И РЕГИСТРАЦИЯ ====================
 function toggleMode() {
     isLoginMode = !isLoginMode;
@@ -123,7 +135,9 @@ async function registerUser(email, password, firstName, lastName) {
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
             emailVerified: false,
-            provider: 'email'
+            provider: 'email',
+            isAdmin: false,
+            role: 'user'
         });
         
         await user.sendEmailVerification();
@@ -195,10 +209,17 @@ async function loginUser(email, password) {
         const userDoc = await db.collection('users').doc(user.uid).get();
         const userData = userDoc.data();
         
+        // Проверка дали е администратор
+        const admin = await isUserAdmin(user.uid);
+        
         showSuccess(`✅ Добре дошъл обратно, ${userData?.firstName || user.displayName || 'потребител'}! Пренасочване...`);
         
         setTimeout(() => {
-            window.location.href = 'dashboard.html';
+            if (admin) {
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                window.location.href = 'dashboard.html';
+            }
         }, 2000);
         
     } catch (error) {
@@ -259,10 +280,18 @@ async function signInWithGoogle() {
         });
         
         const userData = userDoc.data();
+        
+        // Проверка дали е администратор
+        const admin = await isUserAdmin(user.uid);
+        
         showSuccess(`✅ Добре дошъл обратно, ${userData.fullName || user.displayName || 'потребител'}!`);
         
         setTimeout(() => {
-            window.location.href = 'dashboard.html';
+            if (admin) {
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                window.location.href = 'dashboard.html';
+            }
         }, 2000);
         
     } catch (error) {
@@ -334,7 +363,9 @@ async function registerWithGoogle() {
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
             emailVerified: user.emailVerified,
-            provider: 'google'
+            provider: 'google',
+            isAdmin: false,
+            role: 'user'
         });
         
         showSuccess(`✅ Успешна регистрация с Google! Добре дошъл, ${user.displayName || 'потребител'}.`);
