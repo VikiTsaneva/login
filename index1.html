@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход и Регистрация с Firebase</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm" class="login-form">
+            <h2>Добре дошли!</h2>
+            
+            <!-- Полета за име и фамилия (само при регистрация) -->
+            <div class="form-group" id="nameFields" style="display: none;">
+                <label for="firstName">Име:</label>
+                <input type="text" id="firstName" placeholder="въведете име">
+                
+                <label for="lastName" style="margin-top: 10px;">Фамилия:</label>
+                <input type="text" id="lastName" placeholder="въведете фамилия">
+            </div>
+            
+            <!-- Полета за имейл и парола -->
+            <div class="form-group">
+                <label for="email">Имейл:</label>
+                <input type="email" id="email" required placeholder="въведете имейл">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Парола:</label>
+                <input type="password" id="password" required placeholder="въведете парола">
+            </div>
+
+            <!-- БУТОНИ ЗА ИМЕЙЛ/ПАРОЛА -->
+            <button type="submit" class="btn-login" id="loginBtn">Вход</button>
+            <button type="button" class="btn-register" id="registerBtn">Регистрация</button>
+            
+            <!-- РАЗДЕЛИТЕЛ -->
+            <div class="divider">или</div>
+            
+            <!-- БУТОН ЗА ВХОД С GOOGLE -->
+            <button type="button" class="btn-google" id="googleSignInBtn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+                Вход с Google
+            </button>
+            
+            <!-- БУТОН ЗА РЕГИСТРАЦИЯ С GOOGLE -->
+            <button type="button" class="btn-google" id="googleRegisterBtn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+                Регистрация с Google
+            </button>
+            
+            <!-- Бутон за връщане към вход -->
+            <button type="button" class="btn-switch" id="switchToLoginBtn" style="display: none;">← Назад към вход</button>
+            
+            <!-- Забравена парола -->
+            <div class="forgot-password">
+                <a href="#" id="forgotPassword">Забравена парола?</a>
+            </div>
+            
+            <!-- Съобщения -->
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+            <div id="infoMessage" class="info-message"></div>
+        </form>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

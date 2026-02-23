@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Табло</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container dashboard-container">
+        <h1>📊 Добре дошли в таблото!</h1>
+        
+        <div class="user-info" id="userInfo">
+            <p>Зареждане на информация...</p>
+        </div>
+        
+        <button id="logoutBtn" class="btn-login btn-logout">Изход от системата</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtTNJsKJWnOVpRazP5Txz37ll_odEkEo8",
+            authDomain: "registration-88c86.firebaseapp.com",
+            projectId: "registration-88c86",
+            storageBucket: "registration-88c86.firebasestorage.app",
+            messagingSenderId: "344139226116",
+            appId: "1:344139226116:web:4d1559eab47beab89a2951"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const userInfo = document.getElementById('userInfo');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user && user.emailVerified) {
+                try {
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                        const creationTime = new Date(user.metadata.creationTime).toLocaleString('bg-BG');
+                        const lastSignInTime = new Date(user.metadata.lastSignInTime).toLocaleString('bg-BG');
+                        
+                        const photoHTML = userData.photoURL 
+                            ? `<img src="${userData.photoURL}" alt="Profile" class="profile-image">` 
+                            : '';
+                        
+                        userInfo.innerHTML = `
+                            ${photoHTML}
+                            <h2 class="user-name">👤 ${userData.fullName || user.displayName || 'Потребител'}</h2>
+                            <p><strong>📧 Имейл:</strong> ${user.email} <span class="badge-success">✓ Потвърден</span></p>
+                            <p><strong>👤 Име:</strong> ${userData.firstName || 'не е посочено'}</p>
+                            <p><strong>👥 Фамилия:</strong> ${userData.lastName || 'не е посочена'}</p>
+                            <p><strong>🔐 Метод за вход:</strong> ${userData.provider === 'google' ? 'Google' : 'Имейл/парола'}</p>
+                            <p><strong>🆔 Потребителско ID:</strong> <code>${user.uid}</code></p>
+                            <p><strong>📅 Регистриран на:</strong> ${creationTime}</p>
+                            <p><strong>🕐 Последен вход:</strong> ${lastSignInTime}</p>
+                        `;
+                    } else {
+                        userInfo.innerHTML = `
+                            <p><strong>👤 Потребител:</strong> ${user.displayName || 'Без име'}</p>
+                            <p><strong>📧 Имейл:</strong> ${user.email}</p>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Грешка при зареждане на данни:', error);
+                    userInfo.innerHTML = '<p>Грешка при зареждане на информацията</p>';
+                }
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            firebase.auth().signOut()
+                .then(() => {
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    alert('Грешка при изход: ' + error.message);
+                });
+        });
+    </script>
+</body>
+</html>

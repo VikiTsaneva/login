@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.login-form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Бутон за вход */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 10px;
+}
+
+.btn-login:hover {
+    background: #5a67d8;
+}
+
+/* Бутон за регистрация (имейл/парола) */
+.btn-register {
+    width: 100%;
+    padding: 12px;
+    background: #38a169;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-register:hover {
+    background: #2f855a;
+}
+
+/* Бутони за Google (общи стилове) */
+.btn-google {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #757575;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-google:hover {
+    background: #f8f8f8;
+    border-color: #bbb;
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Специфични стилове за бутона за регистрация с Google */
+#googleRegisterBtn {
+    margin-top: 5px;
+    background: #f0f9ff;
+    border-color: #4299e1;
+    color: #2b6cb0;
+}
+
+#googleRegisterBtn:hover {
+    background: #e6f0ff;
+}
+
+/* Бутон за превключване */
+.btn-switch {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn-switch:hover {
+    background: #667eea;
+    color: white;
+}
+
+/* Разделител */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #999;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.divider::before {
+    margin-right: 10px;
+}
+
+.divider::after {
+    margin-left: 10px;
+}
+
+/* Забравена парола */
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-password a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+/* Съобщения */
+.error-message {
+    color: #e53e3e;
+    background: #fff5f5;
+    border-left: 4px solid #e53e3e;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 5px;
+    display: none;
+    font-size: 14px;
+}
+
+.success-message {
+    color: #38a169;
+    background: #f0fff4;
+    border-left: 4px solid #38a169;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 5px;
+    display: none;
+    font-size: 14px;
+}
+
+.info-message {
+    color: #3182ce;
+    background: #ebf8ff;
+    border-left: 4px solid #3182ce;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 5px;
+    display: none;
+    font-size: 14px;
+}
+
+/* Бутон за преизпращане */
+.btn-resend {
+    background: #4299e1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-resend:hover {
+    background: #3182ce;
+}
+
+/* Лоадинг индикатор */
+.loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Dashboard стилове */
+.dashboard-container {
+    text-align: center;
+}
+
+.user-info {
+    background: #f7fafc;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.user-info p {
+    margin: 15px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 5px;
+    border-left: 4px solid #667eea;
+    word-break: break-all;
+}
+
+.user-name {
+    font-size: 24px;
+    color: #2d3748;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.badge-success {
+    background: #38a169;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #667eea;
+}
+
+.btn-logout {
+    background: #e53e3e;
+}
+
+.btn-logout:hover {
+    background: #c53030;
+}
