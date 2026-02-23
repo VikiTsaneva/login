@@ -5,28 +5,32 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
 }
 
 .container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.login-form {
     background: white;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
 .login-form h2 {
     text-align: center;
-    color: #333;
     margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
 }
 
 .form-group {
@@ -37,83 +41,88 @@ body {
     display: block;
     margin-bottom: 5px;
     color: #555;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .form-group input {
     width: 100%;
     padding: 12px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #e0e0e0;
     border-radius: 5px;
     font-size: 16px;
-    transition: all 0.3s;
+    transition: border-color 0.3s;
 }
 
 .form-group input:focus {
     outline: none;
     border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-/* Бутон за вход */
-.btn-login {
+.btn-login, .btn-register, .btn-switch {
     width: 100%;
     padding: 12px;
-    background: #667eea;
-    color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s;
+}
+
+.btn-login {
+    background: #667eea;
+    color: white;
     margin-bottom: 10px;
 }
 
 .btn-login:hover {
     background: #5a67d8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
-/* Бутон за регистрация (имейл/парола) */
 .btn-register {
-    width: 100%;
-    padding: 12px;
-    background: #38a169;
+    background: #48bb78;
     color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
+    margin-bottom: 10px;
 }
 
 .btn-register:hover {
-    background: #2f855a;
+    background: #38a169;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
 }
 
-/* Бутони за Google (общи стилове) */
+.btn-switch {
+    background: #718096;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.btn-switch:hover {
+    background: #4a5568;
+}
+
 .btn-google {
     width: 100%;
     padding: 12px;
-    background: white;
-    color: #757575;
-    border: 2px solid #ddd;
+    border: 2px solid #e0e0e0;
     border-radius: 5px;
+    background: white;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    transition: all 0.3s;
+    margin-bottom: 10px;
 }
 
 .btn-google:hover {
-    background: #f8f8f8;
-    border-color: #bbb;
+    background: #f7fafc;
+    border-color: #667eea;
 }
 
 .btn-google img {
@@ -121,66 +130,34 @@ body {
     height: 20px;
 }
 
-/* Специфични стилове за бутона за регистрация с Google */
-#googleRegisterBtn {
-    margin-top: 5px;
-    background: #f0f9ff;
-    border-color: #4299e1;
-    color: #2b6cb0;
-}
-
-#googleRegisterBtn:hover {
-    background: #e6f0ff;
-}
-
-/* Бутон за превключване */
-.btn-switch {
-    width: 100%;
-    padding: 10px;
-    background: transparent;
-    color: #667eea;
-    border: 2px solid #667eea;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 10px;
-}
-
-.btn-switch:hover {
-    background: #667eea;
-    color: white;
-}
-
-/* Разделител */
 .divider {
-    display: flex;
-    align-items: center;
     text-align: center;
     margin: 20px 0;
+    position: relative;
     color: #999;
 }
 
 .divider::before,
 .divider::after {
     content: '';
-    flex: 1;
-    border-bottom: 1px solid #ddd;
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #e0e0e0;
 }
 
 .divider::before {
-    margin-right: 10px;
+    left: 0;
 }
 
 .divider::after {
-    margin-left: 10px;
+    right: 0;
 }
 
-/* Забравена парола */
 .forgot-password {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .forgot-password a {
@@ -193,124 +170,62 @@ body {
     text-decoration: underline;
 }
 
-/* Съобщения */
 .error-message {
-    color: #e53e3e;
-    background: #fff5f5;
-    border-left: 4px solid #e53e3e;
-    padding: 12px;
-    margin-top: 15px;
+    background: #fed7d7;
+    color: #c53030;
+    padding: 10px;
     border-radius: 5px;
-    display: none;
+    margin-top: 20px;
     font-size: 14px;
+    display: none;
 }
 
 .success-message {
-    color: #38a169;
-    background: #f0fff4;
-    border-left: 4px solid #38a169;
-    padding: 12px;
-    margin-top: 15px;
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 10px;
     border-radius: 5px;
-    display: none;
+    margin-top: 20px;
     font-size: 14px;
+    display: none;
 }
 
 .info-message {
-    color: #3182ce;
-    background: #ebf8ff;
-    border-left: 4px solid #3182ce;
-    padding: 12px;
-    margin-top: 15px;
+    background: #bee3f8;
+    color: #2c5282;
+    padding: 10px;
     border-radius: 5px;
+    margin-top: 20px;
+    font-size: 14px;
     display: none;
-    font-size: 14px;
 }
 
-/* Бутон за преизпращане */
-.btn-resend {
-    background: #4299e1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.btn-resend:hover {
-    background: #3182ce;
-}
-
-/* Лоадинг индикатор */
 .loading {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 3px solid rgba(255,255,255,0.3);
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
     border-radius: 50%;
-    border-top-color: white;
+    border-top-color: #fff;
     animation: spin 1s ease-in-out infinite;
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
 
-/* Dashboard стилове */
-.dashboard-container {
-    text-align: center;
-}
-
-.user-info {
-    background: #f7fafc;
-    padding: 30px;
-    border-radius: 10px;
-    margin: 20px 0;
-    text-align: left;
-}
-
-.user-info p {
-    margin: 15px 0;
-    padding: 15px;
-    background: white;
-    border-radius: 5px;
-    border-left: 4px solid #667eea;
-    word-break: break-all;
-}
-
-.user-name {
-    font-size: 24px;
-    color: #2d3748;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.badge-success {
-    background: #38a169;
+.btn-resend {
+    background: #667eea;
     color: white;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    margin-left: 10px;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
-.profile-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    border: 3px solid #667eea;
-}
-
-.btn-logout {
-    background: #e53e3e;
-}
-
-.btn-logout:hover {
-    background: #c53030;
+.btn-resend:hover {
+    background: #5a67d8;
 }
